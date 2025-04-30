@@ -32,6 +32,24 @@
                 <input type="password" name="password_confirmation" placeholder="Confirm Password" required style="width: 100%; padding: 12px; border: none; border-radius: 5px; background: #333; color: #fff;">
             </div>
             <button type="submit" style="width: 100%; padding: 12px; background-color: #e53637; border: none; border-radius: 5px; color: white; font-weight: bold;">Register</button>
+            <p style="color: #ccc; text-align: center; margin-top: 15px; margin-bottom: 15px;">Or register with:</p>
+            <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+                <a href="{{ route('socialite.redirect', 'google') }}" style="display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background-color: #DB4437; color: white; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" title="Register with Google" onmouseover="this.style.boxShadow='0 5px 15px rgba(219,68,55,0.5)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)'; this.style.transform='translateY(0)'">
+                    <i class="fa fa-google"></i>
+                </a>
+                <a href="{{ route('socialite.redirect', 'facebook') }}" style="display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background-color: #3b5998; color: white; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" title="Register with Facebook" onmouseover="this.style.boxShadow='0 5px 15px rgba(59,89,152,0.5)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)'; this.style.transform='translateY(0)'">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="{{ route('socialite.redirect', 'github') }}" style="display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background-color: #333; color: white; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" title="Register with Github" onmouseover="this.style.boxShadow='0 5px 15px rgba(51,51,51,0.5)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)'; this.style.transform='translateY(0)'">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a href="{{ route('socialite.redirect', 'twitter') }}" style="display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background-color: #000; color: white; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" title="Register with X (Twitter)" onmouseover="this.style.boxShadow='0 5px 15px rgba(0,0,0,0.5)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)'; this.style.transform='translateY(0)'">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a href="{{ route('socialite.redirect', 'linkedin') }}" style="display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background-color: #0077b5; color: white; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" title="Register with LinkedIn" onmouseover="this.style.boxShadow='0 5px 15px rgba(0,119,181,0.5)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)'; this.style.transform='translateY(0)'">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>
             <p style="color: #ccc; text-align: center; margin-top: 15px;">Already have an account? <a href="{{ url('/login') }}" style="color: #e53637;">Sign In</a></p>
         </form>
     </div>
