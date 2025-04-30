@@ -4,41 +4,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 
+// Home Page
 Route::get('/', function () {
-    return view('home');
+    return view('webfront.home');
 });
 
-Route::get('/about', function () {
-    return view('about');
+// Web Pages (about, blog, etc.)
+Route::prefix('')->group(function () {
+    Route::view('/about', 'webfront.about')->name('about');
+    Route::view('/blog', 'webfront.blog')->name('blog');
+    Route::view('/blog-details', 'webfront.blog-details')->name('blog.details');
+    Route::view('/shop', 'webfront.shop')->name('shop');
+    Route::view('/shop-details', 'webfront.shop-details')->name('shop.details');
+    Route::view('/shopping-cart', 'webfront.shopping-cart')->name('cart');
+    Route::view('/checkout', 'webfront.checkout')->name('checkout');
+    Route::view('/contact', 'webfront.contact')->name('contact');
 });
 
-Route::get('/blog', function () {
-    return view('blog');
-});
-
-Route::get('/blog-details', function () {
-    return view('blog-details');
-});
-
-Route::get('/shop', function () {
-    return view('shop');
-});
-
-Route::get('/shop-details', function () {
-    return view('shop-details');
-});
-
-Route::get('/shopping-cart', function () {
-    return view('shopping-cart');
-});
-
-Route::get('/checkout', function () {
-    return view('checkout');
-});
-
-Route::get('/contact', function () {
-    return view('contact');
-});
+// Contact Form Route
+Route::view('/contactform', 'webfront.contactform')->name('contactform');
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -60,6 +44,3 @@ Route::get('/password/reset', [AuthController::class, 'showForgotPasswordForm'])
 Route::post('/password/email', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/password/reset/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/password/reset', [AuthController::class, 'resetPassword'])->name('password.update');
-
-// Contact Form Route
-Route::view('/contact', 'contactform')->name('contactform');
