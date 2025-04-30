@@ -15,12 +15,32 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
-        </li> -->
         <li class="nav-item">
-          <a class="nav-link" href="{{ url('/login') }}">Contact</a>
+          <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
         </li>
+        @guest
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/register') }}">Register</a>
+          </li>
+        @else
+          @if (!Auth::user()->hasVerifiedEmail())
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('verification.notice') }}" style="color: #e53637;">Verify Email</a>
+            </li>
+          @endif
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/profile') }}">Profile ({{ Auth::user()->name }})</a>
+          </li>
+          <li class="nav-item">
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+              @csrf
+              <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none; margin-right: 15px;">Logout</button>
+            </form>
+          </li>
+        @endguest
       </ul>
     </div>
   </div>

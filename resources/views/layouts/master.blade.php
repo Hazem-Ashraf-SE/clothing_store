@@ -34,8 +34,20 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__option">
             <div class="offcanvas__links">
-            <a href="{{ url('/login') }}">Sign In</a>
-            <a href="#">FAQs</a>
+                @guest
+                    <a href="{{ url('/login') }}">Sign In</a>
+                    <a href="{{ url('/register') }}">Register</a>
+                @else
+                    @if (!Auth::user()->hasVerifiedEmail())
+                        <a href="{{ route('verification.notice') }}" style="color: #e53637;">Verify Email</a>
+                    @endif
+                    <a href="{{ url('/profile') }}">Profile ({{ Auth::user()->name }})</a>
+                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" style="background: none; border: none; color: #e53637; padding: 0; margin-right: 15px;">Logout</button>
+                    </form>
+                @endguest
+                <a href="#">FAQs</a>
             </div>
             <div class="offcanvas__top__hover">
                 <span>Usd <i class="arrow_carrot-down"></i></span>
@@ -72,8 +84,20 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                            <a href="{{ url('/login') }}">Sign In</a>
-                            <a href="#">FAQs</a>
+                                @guest
+                                    <a href="{{ url('/login') }}">Sign In</a>
+                                    <a href="{{ url('/register') }}">Register</a>
+                                @else
+                                    @if (!Auth::user()->hasVerifiedEmail())
+                                        <a href="{{ route('verification.notice') }}" style="color: #e53637;">Verify Email</a>
+                                    @endif
+                                    <a href="{{ url('/profile') }}">Profile ({{ Auth::user()->name }})</a>
+                                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" style="background: none; border: none; color: #e53637; padding: 0; margin-right: 15px;">Logout</button>
+                                    </form>
+                                @endguest
+                                <a href="#">FAQs</a>
                             </div>
                             <div class="header__top__hover">
                                 <span>Usd <i class="arrow_carrot-down"></i></span>
@@ -178,7 +202,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </footer>
     <!-- Footer Section End -->
