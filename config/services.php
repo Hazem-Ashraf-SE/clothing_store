@@ -38,26 +38,26 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'redirect' => env('GOOGLE_REDIRECT_URI', 'http://127.0.0.1:8000/auth/google/callback'),
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => env('FACEBOOK_REDIRECT_URI'),
+        'redirect' => env('FACEBOOK_REDIRECT_URI', 'http://127.0.0.1:8000/auth/facebook/callback'),
     ],
 
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_REDIRECT_URI'),
+        'redirect' => env('GITHUB_REDIRECT_URI', 'http://127.0.0.1:8000/auth/github/callback'),
     ],
 
     'twitter' => [
         // Twitter/X requires OAuth 1.0a with consumer keys
         'client_id' => env('TWITTER_API_KEY', env('TWITTER_CLIENT_ID')),
         'client_secret' => env('TWITTER_API_SECRET', env('TWITTER_CLIENT_SECRET')),
-        'redirect' => env('TWITTER_REDIRECT_URI'),
+        'redirect' => env('TWITTER_REDIRECT_URI', 'http://127.0.0.1:8000/auth/twitter/callback'),
         // Explicitly disable OAuth 2.0 for Twitter
         'use_oauth_2' => false,
     ],
@@ -65,6 +65,6 @@ return [
     'linkedin' => [
         'client_id' => env('LINKEDIN_CLIENT_ID'),
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect' => env('LINKEDIN_REDIRECT_URI'),
+        'redirect' => env('LINKEDIN_REDIRECT_URI', 'http://127.0.0.1:8000/auth/linkedin/callback'),
     ],
 ];

@@ -163,4 +163,26 @@ class AuthController extends Controller
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
+    
+    /**
+     * Delete the user's account
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteAccount(Request $request)
+    {
+        // Get the user before logging out
+        $user = Auth::user();
+        
+        // Log the user out
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        // Delete the user account
+        $user->delete();
+        
+        return redirect('/')->with('status', 'Your account has been permanently deleted.');
+    }
 }

@@ -42,6 +42,11 @@
                         <a href="{{ route('verification.notice') }}" style="color: #e53637;">Verify Email</a>
                     @endif
                     <a href="{{ url('/profile') }}">Profile ({{ Auth::user()->name }})</a>
+                    <form action="{{ route('account.delete') }}" method="POST" style="display: inline; margin-right: 10px;" onsubmit="return confirm('Are you sure you want to permanently delete your account? This action cannot be undone.');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="background: none; border: none; color: #e53637; padding: 0;">Delete Account</button>
+                    </form>
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" style="background: none; border: none; color: #e53637; padding: 0; margin-right: 15px;">Logout</button>
@@ -92,6 +97,11 @@
                                         <a href="{{ route('verification.notice') }}" style="color: #e53637;">Verify Email</a>
                                     @endif
                                     <a href="{{ url('/profile') }}">Profile ({{ Auth::user()->name }})</a>
+                                    <form action="{{ route('account.delete') }}" method="POST" style="display: inline; margin-right: 10px;" onsubmit="return confirm('Are you sure you want to permanently delete your account? This action cannot be undone.');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="background: none; border: none; color: #e53637; padding: 0;">Delete Account</button>
+                                    </form>
                                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                                         @csrf
                                         <button type="submit" style="background: none; border: none; color: #e53637; padding: 0; margin-right: 15px;">Logout</button>

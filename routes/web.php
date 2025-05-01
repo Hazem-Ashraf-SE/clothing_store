@@ -49,3 +49,8 @@ Route::post('/password/reset', [AuthController::class, 'resetPassword'])->name('
 // Socialite Routes
 Route::get('/auth/{provider}/redirect', [SocialiteController::class, 'redirectToProvider'])->name('socialite.redirect');
 Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])->name('socialite.callback');
+
+// Account Management Routes
+Route::middleware(['auth'])->group(function () {
+    Route::delete('/account/delete', [AuthController::class, 'deleteAccount'])->name('account.delete');
+});

@@ -43,7 +43,7 @@
                     <i class="fa fa-github"></i>
                 </a>
                 <a href="{{ route('socialite.redirect', 'twitter') }}" style="display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background-color: #000; color: white; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" title="Sign in with X (Twitter)" onmouseover="this.style.boxShadow='0 5px 15px rgba(0,0,0,0.5)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)'; this.style.transform='translateY(0)'">
-                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-x"></i>
                 </a>
                 <a href="{{ route('socialite.redirect', 'linkedin') }}" style="display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background-color: #0077b5; color: white; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" title="Sign in with LinkedIn" onmouseover="this.style.boxShadow='0 5px 15px rgba(0,119,181,0.5)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)'; this.style.transform='translateY(0)'">
                     <i class="fa fa-linkedin"></i>
