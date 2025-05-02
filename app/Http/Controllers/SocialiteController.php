@@ -25,8 +25,12 @@ class SocialiteController extends Controller
             if ($provider === 'linkedin') {
                 \Log::info("LinkedIn redirect initiated with client_id: " . config('services.linkedin.client_id'));
                 
-                // Use a more robust approach for LinkedIn
+                // Use OpenID Connect for LinkedIn
                 return Socialite::driver($provider)
+                    ->scopes(['openid', 'profile', 'email'])
+                    ->with([
+                        'response_type' => 'code',
+                    ])
                     ->redirect();
             }
             
