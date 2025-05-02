@@ -66,5 +66,6 @@ return [
         'client_id' => env('LINKEDIN_CLIENT_ID'),
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
         'redirect' => env('LINKEDIN_REDIRECT_URI', 'http://127.0.0.1:8000/auth/linkedin/callback'),
+        'api_version' => 'v2',
     ],
 ];
