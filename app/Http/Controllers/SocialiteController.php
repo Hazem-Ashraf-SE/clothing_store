@@ -34,6 +34,31 @@ class SocialiteController extends Controller
                     ->redirect();
             }
             
+            // Special handling for Twitter
+            if ($provider === 'twitter') {
+                // Log the Twitter configuration
+                \Log::info("Twitter redirect initiated with keys: " . json_encode([
+                    'consumer_key' => config('services.twitter.consumer_key'),
+                    'has_secret' => !empty(config('services.twitter.consumer_secret')),
+                    'redirect' => config('services.twitter.redirect')
+                ]));
+                
+                try {
+                    // Create the Twitter driver with explicit configuration
+                    $config = config('services.twitter');
+                    $driver = Socialite::driver('twitter');
+                    
+                    // Return the redirect response
+                    return $driver->redirect();
+                } catch (\Exception $e) {
+                    \Log::error("Twitter driver error: " . $e->getMessage());
+                    \Log::error("Twitter driver error trace: " . $e->getTraceAsString());
+                    
+                    // Return a more user-friendly error
+                    return redirect('/login')->with('error', 'Error connecting to Twitter: ' . $e->getMessage());
+                }
+            }
+            
             // For other providers, use the default flow
             return Socialite::driver($provider)->redirect();
         } catch (\Exception $e) {
@@ -73,6 +98,27 @@ class SocialiteController extends Controller
                 \Log::info("LinkedIn user data: " . json_encode([
                     'id' => $socialUser->getId(),
                     'name' => $socialUser->getName(),
+                    'email' => $socialUser->getEmail(),
+                    'avatar' => $socialUser->getAvatar(),
+                ]));
+            } 
+            // Special handling for Twitter
+            else if ($provider === 'twitter') {
+                \Log::info("Twitter callback received with client_id: " . config('services.twitter.client_id'));
+                
+                // Check for denied access
+                if (request()->has('denied')) {
+                    throw new \Exception('Twitter authentication was denied by the user');
+                }
+                
+                // Get the user
+                $socialUser = Socialite::driver($provider)->user();
+                
+                // Log user data for debugging
+                \Log::info("Twitter user data: " . json_encode([
+                    'id' => $socialUser->getId(),
+                    'name' => $socialUser->getName(),
+                    'nickname' => $socialUser->getNickname(),
                     'email' => $socialUser->getEmail(),
                     'avatar' => $socialUser->getAvatar(),
                 ]));
@@ -141,6 +187,23 @@ class SocialiteController extends Controller
                     'state' => request()->input('state') ? 'present' : 'missing',
                     'error' => request()->input('error'),
                     'error_description' => request()->input('error_description'),
+                ]));
+            }
+            
+            if ($provider === 'twitter') {
+                // Log Twitter specific configuration for debugging
+                \Log::error("Twitter configuration: " . json_encode([
+                    'consumer_key' => config('services.twitter.consumer_key'),
+                    'has_secret' => !empty(config('services.twitter.consumer_secret')),
+                    'redirect' => config('services.twitter.redirect'),
+                ]));
+                
+                // Log request details
+                \Log::error("Twitter callback request: " . json_encode([
+                    'oauth_token' => request()->input('oauth_token') ? 'present' : 'missing',
+                    'oauth_verifier' => request()->input('oauth_verifier') ? 'present' : 'missing',
+                    'denied' => request()->input('denied'),
+                    'all_params' => request()->all(),
                 ]));
             }
             

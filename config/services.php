@@ -54,12 +54,10 @@ return [
     ],
 
     'twitter' => [
-        // Twitter/X requires OAuth 1.0a with consumer keys
-        'client_id' => env('TWITTER_API_KEY', env('TWITTER_CLIENT_ID')),
-        'client_secret' => env('TWITTER_API_SECRET', env('TWITTER_CLIENT_SECRET')),
+        // Twitter API keys (OAuth 1.0a)
+        'consumer_key' => env('TWITTER_CLIENT_ID'),
+        'consumer_secret' => env('TWITTER_CLIENT_SECRET'),
         'redirect' => env('TWITTER_REDIRECT_URI', 'http://127.0.0.1:8000/auth/twitter/callback'),
-        // Explicitly disable OAuth 2.0 for Twitter
-        'use_oauth_2' => false,
     ],
 
     'linkedin' => [
