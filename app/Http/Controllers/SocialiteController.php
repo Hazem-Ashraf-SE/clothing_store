@@ -78,6 +78,11 @@ class SocialiteController extends Controller
      */
     public function handleProviderCallback($provider)
     {
+        // Log the callback URL for debugging
+        \Log::info("Callback received for provider: {$provider}");
+        \Log::info("Request URL: " . request()->fullUrl());
+        \Log::info("Request method: " . request()->method());
+        
         try {
             // Special handling for LinkedIn
             if ($provider === 'linkedin') {
